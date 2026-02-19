@@ -1,4 +1,4 @@
-# Spohie Bluel - Architecte d'intérieur
+# Sophie Bluel - Architecte d'intérieur
 
 ## Missions
 Je suis envoyer en renfort comme développeur front-end dans une équipe qui travaille sur la conception du site portfolio d’une architecte d’intérieur.
