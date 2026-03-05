@@ -528,7 +528,20 @@ footer nav ul {
 }
 
 .modal-file-error {                                                                                                                                                                                                                               
-      color: rgb(228, 34, 34);                                                                                                                                                                                                                                   
-      font-size: 0.85rem;        
-	  text-align: center;                                                                                                                                                                                                                   
-  }
+	color: rgb(228, 34, 34);                                                                                                                                                                                                                                   
+	font-size: 0.85rem;        
+	text-align: center;                                                                                                                                                                                                                   
+}
+
+.error-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.server-error {                                                                                                                                                                                                                                   
+	text-align: center;                                                                                                                                                                                                                         
+	color: rgb(228, 34, 34);
+	font-size: 1.2em;
+	padding: 2rem;
+}

@@ -4,22 +4,39 @@ let categories = window.localStorage.getItem('categories');
 let projects = window.localStorage.getItem('projects');
 let auth = window.sessionStorage.getItem('token');
 
-if (categories === null) {
-    const response = await fetch('http://localhost:5678/api/categories')
-    categories = await response.json();
-    const categoriesJson = JSON.stringify(categories);
-    window.localStorage.setItem("categories", categoriesJson);
-}else{
-    categories = JSON.parse(categories);
+function showServerError() {
+    const categories = document.querySelector('#categories');
+    if (categories) {
+        categories.innerHTML = "";
+        const errorContainer = document.createElement("div");
+        errorContainer.classList.add("error-container");
+        const errorMsg = document.createElement("p");
+        errorMsg.classList.add("server-error");
+        errorMsg.innerText = "Une erreur est survenue, nous nous excusons de la gène occasionné.";
+        errorContainer.appendChild(errorMsg);
+        categories.appendChild(errorContainer);
+    }
 }
 
-if (projects === null) {
-    const response = await fetch('http://localhost:5678/api/works')
-    projects = await response.json();
-    const projectsJson = JSON.stringify(projects);
-    window.localStorage.setItem("projects", projectsJson);
-}else{
-    projects = JSON.parse(projects);
+try {
+    if (categories === null) {
+        const response = await fetch('http://localhost:5678/api/categories');
+        categories = await response.json();
+        window.localStorage.setItem("categories", JSON.stringify(categories));
+    } else {
+        categories = JSON.parse(categories);
+    }
+
+    if (projects === null) {
+        const response = await fetch('http://localhost:5678/api/works');
+        projects = await response.json();
+        window.localStorage.setItem("projects", JSON.stringify(projects));
+    } else {
+        projects = JSON.parse(projects);
+    }
+} catch (error) {
+    showServerError();
+    throw error;
 }
 
 function generateCategories(el){
@@ -38,7 +55,6 @@ function generateCategories(el){
     });
 }
 
-generateCategories(categories)
 
 const allCategoriesBtn = document.querySelectorAll('.category-btn');
 allCategoriesBtn.forEach(btn => {
@@ -64,7 +80,6 @@ function generateProjects(el){
         projectsList.appendChild(projectElement);
     })
 }
-generateProjects(projects);
 
 function sortByCategory(categoryId){
     if (categoryId == 0) {
@@ -98,3 +113,6 @@ if(auth){
     
 }
 
+
+generateCategories(categories)
+generateProjects(projects);
