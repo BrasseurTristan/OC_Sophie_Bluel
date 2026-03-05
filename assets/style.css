@@ -527,3 +527,8 @@ footer nav ul {
     cursor: pointer;
 }
 
+.modal-file-error {                                                                                                                                                                                                                               
+      color: rgb(228, 34, 34);                                                                                                                                                                                                                                   
+      font-size: 0.85rem;        
+	  text-align: center;                                                                                                                                                                                                                   
+  }

@@ -135,9 +135,27 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
         const imgPreview = document.createElement("img");
         imgPreview.classList.add("modal-upload-preview");
 
+        const fileError = document.createElement("p");
+        fileError.classList.add("modal-file-error");
+
         fileInput.addEventListener("change", () => {
             const file = fileInput.files[0];
+            fileError.innerText = "";
             if (file) {
+                const allowedTypes = ["image/jpeg", "image/png"];
+                const maxSize = 4194304; // égal à 4 Mo
+                if (!allowedTypes.includes(file.type)) {
+                    fileError.innerText = "Format invalide. Seuls les fichiers jpg et png sont acceptés.";
+                    fileInput.value = "";
+                    checkForm();
+                    return;
+                }
+                if (file.size > maxSize) {
+                    fileError.innerText = "Fichier trop lourd. La taille maximale est de 4 Mo.";
+                    fileInput.value = "";
+                    checkForm();
+                    return;
+                }
                 imgPreview.src = URL.createObjectURL(file);
                 uploadArea.innerHTML = "";
                 uploadArea.appendChild(imgPreview);
@@ -200,6 +218,7 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
 
         form.appendChild(fileInput);
         form.appendChild(uploadArea);
+        form.appendChild(fileError);
         form.appendChild(titleLabel);
         form.appendChild(titleInput);
         form.appendChild(categoryLabel);
