@@ -86,10 +86,12 @@ if(auth){
     editionProjectBtn.addEventListener("click", ()=> {
         projectsModal(projects, categories, (deletedId) => {
             projects = projects.filter(p => p.id !== deletedId);
+            window.localStorage.setItem("projects", JSON.stringify(projects));
             generateProjects(projects);
-        }, 
+        },
         (newProject) => {
             projects.push(newProject);
+            window.localStorage.setItem("projects", JSON.stringify(projects));
             generateProjects(projects);
         })
     })
