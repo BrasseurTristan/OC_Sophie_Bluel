@@ -83,7 +83,7 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
         const addBtn = document.createElement("button");
         addBtn.classList.add("modal-add-btn");
         addBtn.innerText = "Ajouter une photo";
-        addBtn.addEventListener("click", showAddForm);
+        addBtn.addEventListener("click", () => showAddForm());
 
         modal.appendChild(closeBtn);
         modal.appendChild(modalTitle);
@@ -92,9 +92,8 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
         modal.appendChild(addBtn);
     }
 
-    function showAddForm() {
+    function showAddForm(showSuccess = false) {
         modal.innerHTML = "";
-
         const closeBtn = document.createElement("button");
         closeBtn.classList.add("modal-close");
         closeBtn.innerHTML = "&times;";
@@ -195,7 +194,7 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
             if (response.ok) {
                 const newProject = await response.json();
                 if (onAdd) onAdd(newProject);
-                showAddForm();
+                showAddForm(true);
             }
         });
 
@@ -212,6 +211,13 @@ export function projectsModal(projects, categories, onDelete, onAdd) {
         modal.appendChild(backBtn);
         modal.appendChild(modalTitle);
         modal.appendChild(form);
+
+        if (showSuccess) {
+            const successP = document.createElement("p");
+            successP.innerText = "Projet ajouté avec succès !";
+            successP.classList.add("success-message");
+            submitBtn.insertAdjacentElement("beforebegin", successP);
+        }
     }
 
     showGallery();

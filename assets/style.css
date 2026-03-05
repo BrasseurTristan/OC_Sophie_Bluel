@@ -265,6 +265,16 @@ input[type="submit"]{
 	background-color: rgb(234, 57, 57);
 }
 
+.success-message {
+	color: white;
+	background-color: rgb(36, 201, 36);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15px 10px;
+	margin-top: 2em;
+}
+
 footer{
 	background-color: #fff;
 	padding: 2em
